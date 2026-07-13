@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cifrador da Marca — Hudson Sabino</title>
+<meta name="author" content="Hudson Sabino">
+<meta name="description" content="Cifrador do Grau de Mestre Maçom da Marca. Criação de Hudson Sabino, marca pessoal HCSLA.">
+<meta name="copyright" content="© 2026 Hudson Sabino. Marca HCSLA.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --grafite:#2C2C2C; --pedra:#3E3E3E; --pedra-clara:#5C5C5C;
+    --oxblood:#A6120D; --oxblood-esc:#7E0D09;
+    --cal:#EDEAE3; --cal-fraca:rgba(237,234,227,.62); --cal-tenue:rgba(237,234,227,.38);
+    --linha:rgba(237,234,227,.14);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    min-height:100vh; background:var(--grafite); color:var(--cal);
+    font-family:"Inter",system-ui,sans-serif; font-size:15px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ---------- cabecalho / marca ---------- */
+  .topo{
+    border-bottom:1px solid var(--linha);
+    background:linear-gradient(180deg, rgba(0,0,0,.22), transparent);
+  }
+  .topo-int{
+    max-width:1040px; margin:0 auto; padding:26px 28px;
+    display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+  }
+  .emblema{
+    flex:0 0 auto; padding:12px 16px;
+    border:1px solid rgba(166,18,13,.55);
+    background:rgba(166,18,13,.08);
+  }
+  .emblema svg{display:block}
+  .titulos{flex:1 1 260px; min-width:220px}
+  h1{
+    font-family:"Cormorant Garamond",Georgia,serif; font-weight:600;
+    font-size:31px; line-height:1.1; margin:0 0 4px;
+  }
+
+  /* ---------- corpo ---------- */
+  main{max-width:1040px; margin:0 auto; padding:36px 28px 20px}
+  .grade{display:grid; grid-template-columns:1fr 300px; gap:34px; align-items:start}
+  @media (max-width:860px){.grade{grid-template-columns:1fr; gap:26px}}
+
+  label{
+    display:block; font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--cal-tenue); margin-bottom:9px;
+  }
+  input[type=text]{
+    width:100%; padding:15px 18px; background:rgba(0,0,0,.26);
+    border:1px solid var(--linha); color:var(--cal);
+    font-family:"Inter",sans-serif; font-size:21px; letter-spacing:.24em;
+    text-transform:uppercase; outline:none; transition:border-color .15s;
+  }
+  input[type=text]:focus{border-color:var(--oxblood)}
+
+  .tela{
+    margin-top:22px; padding:38px 26px 26px; background:var(--pedra-clara);
+    border:1px solid var(--linha); position:relative; overflow-x:auto;
+  }
+  .tela::before{
+    content:"CIFRA"; position:absolute; top:10px; left:14px;
+    font-size:10px; letter-spacing:.18em; color:rgba(0,0,0,.35);
+  }
+  #saida{display:block; margin:0 auto; max-width:100%; height:auto}
+  .vazio{text-align:center; color:rgba(0,0,0,.4); font-size:14px; padding:26px 0}
+
+  .lateral{
+    background:var(--pedra); border:1px solid var(--linha); padding:22px 20px;
+  }
+  .lateral h2{
+    font-family:"Inter",sans-serif; font-size:11px; font-weight:600;
+    letter-spacing:.14em; text-transform:uppercase; color:var(--cal-tenue);
+    margin:0 0 18px; padding-bottom:12px; border-bottom:1px solid var(--linha);
+  }
+  .ctrl{margin-bottom:18px}
+  .ctrl-topo{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:7px}
+  .ctrl-topo span{font-size:13px; color:var(--cal-fraca)}
+  .ctrl-topo output{font-size:12px; color:var(--cal-tenue); font-variant-numeric:tabular-nums}
+  input[type=range]{width:100%; accent-color:var(--oxblood)}
+  .linha-ctrl{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:14px; font-size:13px; color:var(--cal-fraca)}
+  input[type=color]{width:40px; height:26px; padding:0; border:1px solid var(--linha); background:none; cursor:pointer}
+  input[type=checkbox]{accent-color:var(--oxblood); width:15px; height:15px}
+
+  .acoes{margin-top:22px; display:grid; gap:9px}
+  button{
+    width:100%; font-family:"Inter",sans-serif; font-size:13px; font-weight:500;
+    letter-spacing:.05em; padding:12px 16px; cursor:pointer;
+    background:transparent; color:var(--cal); border:1px solid rgba(237,234,227,.3);
+    transition:background .15s, border-color .15s;
+  }
+  button:hover{background:rgba(237,234,227,.08)}
+  button.principal{background:var(--oxblood); border-color:var(--oxblood); font-weight:600}
+  button.principal:hover{background:var(--oxblood-esc)}
+  button:focus-visible{outline:2px solid var(--cal); outline-offset:2px}
+
+  details{margin-top:34px; border-top:1px solid var(--linha); padding-top:20px}
+  summary{cursor:pointer; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--cal-tenue)}
+  summary:hover{color:var(--cal)}
+  #alfabeto{display:flex; flex-wrap:wrap; gap:14px; margin-top:22px}
+  .cel{text-align:center; width:64px}
+  .cel svg{display:block; margin:0 auto 6px}
+  .cel span{font-size:12px; color:var(--cal-fraca)}
+
+  /* ---------- rodape ---------- */
+  footer{
+    margin-top:44px; border-top:1px solid var(--linha);
+    background:rgba(0,0,0,.18);
+  }
+  .rodape-int{
+    max-width:1040px; margin:0 auto; padding:24px 28px 34px;
+    display:flex; align-items:center; gap:18px; flex-wrap:wrap;
+    font-size:12px; color:var(--cal-tenue); line-height:1.7;
+  }
+  .rodape-int svg{flex:0 0 auto; opacity:.9}
+  .rodape-int b{color:var(--cal-fraca); font-weight:500}
+
+  #aviso{
+    max-width:1040px; margin:0 auto; padding:14px 28px; font-size:13.5px; line-height:1.55;
+    background:rgba(166,18,13,.16); border-bottom:1px solid rgba(166,18,13,.55); color:var(--cal);
+  }
+  #aviso b{font-weight:600}
+
+  /* ---------- mobile ---------- */
+  @media (max-width:720px){
+    body{font-size:15px}
+    .topo-int{padding:18px 18px; gap:14px}
+    .emblema{padding:9px 12px}
+    h1{font-size:25px}
+    main{padding:24px 18px 12px}
+    .grade{gap:22px}
+    input[type=text]{font-size:17px; letter-spacing:.18em; padding:14px 14px}
+    .tela{padding:30px 14px 20px; margin-top:18px}
+    .lateral{padding:18px 16px}
+    button{padding:14px 16px; font-size:14px}
+    input[type=range]{height:26px}
+    input[type=color]{width:48px; height:32px}
+    input[type=checkbox]{width:20px; height:20px}
+    .linha-ctrl{padding:4px 0}
+    .cel{width:56px}
+    details{margin-top:26px}
+    .rodape-int{padding:20px 18px calc(28px + env(safe-area-inset-bottom)); font-size:11.5px; gap:14px}
+    #aviso{padding:14px 18px; font-size:13px}
+  }
+  @media (max-width:380px){
+    h1{font-size:22px}
+    .topo-int{gap:12px}
+    .cel{width:48px}
+  }
+</style>
+</head>
+<body>
+
+<header class="topo">
+  <div class="topo-int">
+    <div class="emblema"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 136 40" width="136" height="40" aria-label="Marca HCSLA"><g transform="translate(5 5)"><g transform="translate(0.0 0) scale(0.3000)"><path d="M10 10H90 M10 10V90 M90 10V90" fill="none" stroke="#A6120D" stroke-width="15.0" stroke-linecap="square" stroke-linejoin="miter"/></g><g transform="translate(24.0 0) scale(0.3000)"><path d="M10 90H90 M90 10V90" fill="none" stroke="#A6120D" stroke-width="15.0" stroke-linecap="square" stroke-linejoin="miter"/></g><g transform="translate(48.0 0) scale(0.3000)"><path d="M10 90L50 10L90 90" fill="none" stroke="#A6120D" stroke-width="15.0" stroke-linecap="square" stroke-linejoin="miter"/></g><g transform="translate(72.0 0) scale(0.3000)"><path d="M10 90H90 M90 10V90" fill="none" stroke="#A6120D" stroke-width="15.0" stroke-linecap="square" stroke-linejoin="miter"/><circle cx="50" cy="50" r="13.5" fill="#A6120D"/></g><g transform="translate(96.0 0) scale(0.3000)"><path d="M10 90H90 M10 10V90" fill="none" stroke="#A6120D" stroke-width="15.0" stroke-linecap="square" stroke-linejoin="miter"/></g></g></svg></div>
+    <div class="titulos">
+      <h1>Cifrador da Marca</h1>
+    </div>
+  </div>
+</header>
+
+<div id="aviso">
+  <b>Esta visualização não executa scripts.</b><br>
+  Toque no ícone de compartilhar e escolha <b>Abrir no Safari</b> (iPhone) ou
+  <b>Abrir com Chrome</b> (Android). Depois use "Adicionar à tela de início" para
+  virar aplicativo, offline.
+</div>
+
+<main>
+  <div class="grade">
+    <section>
+      <label for="texto">Escreva a palavra</label>
+      <input id="texto" type="text" value="HCSLA" autocomplete="off" spellcheck="false" placeholder="Digite aqui">
+      <div class="tela">
+        <svg id="saida" xmlns="http://www.w3.org/2000/svg"></svg>
+        <div class="vazio" id="vazio" hidden>Digite uma palavra para ver a cifra.</div>
+      </div>
+    </section>
+
+    <aside class="lateral">
+      <h2>Traço</h2>
+      <div class="ctrl">
+        <div class="ctrl-topo"><span>Tamanho</span><output id="vTam">80</output></div>
+        <input id="tam" type="range" min="40" max="140" value="80">
+      </div>
+      <div class="ctrl">
+        <div class="ctrl-topo"><span>Espessura</span><output id="vEsp">12</output></div>
+        <input id="esp" type="range" min="4" max="22" value="12">
+      </div>
+      <div class="linha-ctrl"><span>Cor</span><input id="cor" type="color" value="#A6120D"></div>
+      <div class="linha-ctrl"><label for="unir" style="margin:0;text-transform:none;letter-spacing:0;font-size:13px;color:var(--cal-fraca)">Traços unidos</label><input id="unir" type="checkbox"></div>
+      <div class="acoes">
+        <button class="principal" id="btnSvg">Baixar SVG</button>
+        <button id="btnPng">Baixar PNG</button>
+        <button id="btnCopiar">Copiar código SVG</button>
+      </div>
+    </aside>
+  </div>
+
+  <details>
+    <summary>Chave completa do alfabeto</summary>
+    <div id="alfabeto"></div>
+  </details>
+</main>
+
+<footer>
+  <div class="rodape-int">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 92 28" width="92" height="28" aria-label="Marca HCSLA"><g transform="translate(4 4)"><g transform="translate(0.0 0) scale(0.2000)"><path d="M10 10H90 M10 10V90 M90 10V90" fill="none" stroke="rgba(237,234,227,.5)" stroke-width="15.0" stroke-linecap="square" stroke-linejoin="miter"/></g><g transform="translate(16.0 0) scale(0.2000)"><path d="M10 90H90 M90 10V90" fill="none" stroke="rgba(237,234,227,.5)" stroke-width="15.0" stroke-linecap="square" stroke-linejoin="miter"/></g><g transform="translate(32.0 0) scale(0.2000)"><path d="M10 90L50 10L90 90" fill="none" stroke="rgba(237,234,227,.5)" stroke-width="15.0" stroke-linecap="square" stroke-linejoin="miter"/></g><g transform="translate(48.0 0) scale(0.2000)"><path d="M10 90H90 M90 10V90" fill="none" stroke="rgba(237,234,227,.5)" stroke-width="15.0" stroke-linecap="square" stroke-linejoin="miter"/><circle cx="50" cy="50" r="13.5" fill="rgba(237,234,227,.5)"/></g><g transform="translate(64.0 0) scale(0.2000)"><path d="M10 90H90 M10 10V90" fill="none" stroke="rgba(237,234,227,.5)" stroke-width="15.0" stroke-linecap="square" stroke-linejoin="miter"/></g></g></svg>
+    <div>
+      <b>Cifrador da Marca</b> &middot; obra original de Hudson Sabino, identificada pela marca pessoal HCSLA.<br>
+      © 2026 Hudson Sabino. Reprodução, adaptação ou redistribuição sem autorização é vedada.
+    </div>
+  </div>
+</footer>
+
+<script>
+const G1=[["C","B","A"],["F","E","D"],["I","H","G"]];
+const G2=[["L","K","J"],["O","N","M"],["R","Q","P"]];
+const XW={S:"baixo",V:"cima",T:"dir",U:"esq"};
+const XD={W:"baixo",Z:"cima",X:"dir",Y:"esq"};
+
+function chave(l){
+  for(const [g,p] of [[G1,false],[G2,true]])
+    for(let r=0;r<3;r++) for(let c=0;c<3;c++)
+      if(g[r][c]===l) return {tipo:"grade",ponto:p,cima:r>0,baixo:r<2,esq:c>0,dir:c<2};
+  if(XW[l]) return {tipo:"cunha",lado:XW[l],ponto:false};
+  if(XD[l]) return {tipo:"cunha",lado:XD[l],ponto:true};
+  return null;
+}
+function desenho(l){
+  const k=chave(l); if(!k) return null;
+  const L=10,R=90,T=10,B=90,C=50,d=[]; let ponto=null;
+  if(k.tipo==="grade"){
+    if(k.cima)  d.push(`M${L} ${T}H${R}`);
+    if(k.baixo) d.push(`M${L} ${B}H${R}`);
+    if(k.esq)   d.push(`M${L} ${T}V${B}`);
+    if(k.dir)   d.push(`M${R} ${T}V${B}`);
+    if(k.ponto) ponto=[C,C];
+  }else{
+    if(k.lado==="baixo"){d.push(`M${L} ${B}L${C} ${T}L${R} ${B}`); if(k.ponto) ponto=[C,C+18];}
+    if(k.lado==="cima") {d.push(`M${L} ${T}L${C} ${B}L${R} ${T}`); if(k.ponto) ponto=[C,C-18];}
+    if(k.lado==="esq")  {d.push(`M${L} ${T}L${R} ${C}L${L} ${B}`); if(k.ponto) ponto=[C-18,C];}
+    if(k.lado==="dir")  {d.push(`M${R} ${T}L${L} ${C}L${R} ${B}`); if(k.ponto) ponto=[C+18,C];}
+  }
+  return {d:d.join(" "),ponto};
+}
+const norm = t => t.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toUpperCase();
+const esc  = t => t.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+
+const NS="http://www.w3.org/2000/svg";
+function el(nome,attrs){
+  const n=document.createElementNS(NS,nome);
+  for(const k in attrs) n.setAttribute(k,attrs[k]);
+  return n;
+}
+function limpar(n){ while(n.firstChild) n.removeChild(n.firstChild); }
+
+function montar(alvo,txt,tam,esp,cor,unir,margem){
+  const passo = unir ? tam*0.80 : tam*1.05;
+  const s = tam/100, sw = esp/s, raio = esp/s*0.9;
+  const grupo = el("g",{transform:"translate("+margem+" "+margem+")"});
+  let x=0, n=0;
+  for(const ch of txt){
+    if(ch===" "){ x+=passo*0.7; continue; }
+    const g=desenho(ch); if(!g) continue;
+    const cel=el("g",{transform:"translate("+x.toFixed(1)+" 0) scale("+s.toFixed(4)+")"});
+    cel.appendChild(el("path",{d:g.d,fill:"none",stroke:cor,"stroke-width":sw.toFixed(2),
+      "stroke-linecap":"square","stroke-linejoin":"miter"}));
+    if(g.ponto) cel.appendChild(el("circle",{cx:g.ponto[0],cy:g.ponto[1],r:raio.toFixed(2),fill:cor}));
+    grupo.appendChild(cel);
+    x+=passo; n++;
+  }
+  const largura = n ? x-(passo-tam) : 0;
+  const W=Math.ceil(largura+margem*2), H=Math.ceil(tam+margem*2);
+  alvo.setAttribute("viewBox","0 0 "+W+" "+H);
+  alvo.setAttribute("width",W);
+  alvo.setAttribute("height",H);
+  limpar(alvo);
+  alvo.appendChild(grupo);
+  return {W,H,vazio:n===0};
+}
+
+const saida=document.getElementById("saida"), vazio=document.getElementById("vazio");
+const $ = id => document.getElementById(id);
+
+function render(){
+  const tam=+$("tam").value, esp=+$("esp").value, cor=$("cor").value, unir=$("unir").checked;
+  $("vTam").textContent=tam; $("vEsp").textContent=esp;
+  const r=montar(saida,norm($("texto").value),tam,esp,cor,unir,tam*0.30);
+  vazio.hidden=!r.vazio; saida.style.display=r.vazio?"none":"block";
+  const disp = Math.max(200, saida.parentElement.clientWidth - 4);
+  if(r.W>disp){saida.setAttribute("width",disp); saida.setAttribute("height",Math.round(r.H*disp/r.W));}
+}
+
+function codigoSvg(){
+  const c=saida.cloneNode(true);
+  c.setAttribute("xmlns",NS);
+  c.setAttribute("xmlns:dc","http://purl.org/dc/elements/1.1/");
+  c.removeAttribute("style");
+  const palavra=norm($("texto").value).replace(/[^A-Z ]/g,"").trim();
+  const t=el("title",{}); t.textContent=palavra+" \u2013 cifrario do Grau de Mestre da Marca";
+  const d=el("desc",{});  d.textContent="Gerado pelo Cifrador da Marca, obra original de Hudson Sabino, marca pessoal HCSLA.";
+  const m=el("metadata",{});
+  const cr=document.createElementNS("http://purl.org/dc/elements/1.1/","dc:creator"); cr.textContent="Hudson Sabino";
+  const ri=document.createElementNS("http://purl.org/dc/elements/1.1/","dc:rights");  ri.textContent="\u00a9 2026 Hudson Sabino. Marca HCSLA.";
+  const dt=document.createElementNS("http://purl.org/dc/elements/1.1/","dc:date");    dt.textContent=new Date().toISOString().slice(0,10);
+  m.appendChild(cr); m.appendChild(ri); m.appendChild(dt);
+  c.insertBefore(m,c.firstChild); c.insertBefore(d,c.firstChild); c.insertBefore(t,c.firstChild);
+  return '<?xml version="1.0" encoding="UTF-8"?>\n' + new XMLSerializer().serializeToString(c);
+}
+
+const baixar=(blob,nome)=>{const u=URL.createObjectURL(blob),a=document.createElement("a");a.href=u;a.download=nome;a.click();URL.revokeObjectURL(u);};
+const nomeArq=ext=>"Marca_"+(norm($("texto").value).replace(/[^A-Z]/g,"")||"cifra")+"."+ext;
+
+$("btnSvg").onclick=()=>baixar(new Blob([codigoSvg()],{type:"image/svg+xml"}),nomeArq("svg"));
+$("btnPng").onclick=()=>{
+  const vb=saida.getAttribute("viewBox").split(" ").map(Number), k=4, img=new Image();
+  img.onload=()=>{const cv=document.createElement("canvas");cv.width=vb[2]*k;cv.height=vb[3]*k;
+    cv.getContext("2d").drawImage(img,0,0,cv.width,cv.height);
+    cv.toBlob(b=>baixar(b,nomeArq("png")),"image/png");};
+  img.src="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(codigoSvg());
+};
+$("btnCopiar").onclick=async e=>{
+  await navigator.clipboard.writeText(codigoSvg());
+  const b=e.currentTarget,t=b.textContent; b.textContent="Copiado";
+  setTimeout(()=>b.textContent=t,1400);
+};
+
+const alf=document.getElementById("alfabeto");
+for(const l of "ABCDEFGHIJKLMNOPQRSTUVWXYZ"){
+  const cel=document.createElement("div"); cel.className="cel";
+  const s=el("svg",{xmlns:NS});
+  montar(s,l,40,3.4,"#EDEAE3",false,6);
+  cel.appendChild(s);
+  const sp=document.createElement("span"); sp.textContent=l; cel.appendChild(sp);
+  alf.appendChild(cel);
+}
+
+const aviso=document.getElementById("aviso"); if(aviso) aviso.parentNode.removeChild(aviso);
+for(const id of ["texto","tam","esp","cor","unir"]) $(id).addEventListener("input",render);
+window.addEventListener("resize", render);
+render();
+</script>
+</body>
+</html>
