@@ -1,0 +1,20 @@
+CIFRADOR DA MARCA
+Obra original de Hudson Sabino. Marca pessoal HCSLA.
+
+Copyright (c) 2026 Hudson Sabino. Todos os direitos reservados.
+
+Este programa, seu codigo-fonte, sua interface, seu emblema e o conjunto grafico
+associado a marca HCSLA sao obra intelectual de Hudson Sabino, protegida pela
+Lei 9.610/1998 (Direitos Autorais) e pela Lei 9.609/1998 (Programa de Computador).
+
+E permitido:
+  - usar o aplicativo livremente, para fins pessoais, de estudo e fraternos;
+  - compartilhar o endereco publico da obra.
+
+E vedado, sem autorizacao previa e por escrito do autor:
+  - copiar, adaptar, redistribuir ou republicar o codigo, no todo ou em parte;
+  - remover, alterar ou substituir a identificacao de autoria, o emblema HCSLA
+    ou os metadados de autoria embutidos nos arquivos gerados;
+  - explorar comercialmente a obra ou dela derivar produtos.
+
+Contato para autorizacoes: (preencher e-mail)
