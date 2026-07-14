@@ -7,6 +7,17 @@
 <meta name="author" content="Hudson Sabino">
 <meta name="description" content="Cifrador do Grau de Mestre Maçom da Marca. Criação de Hudson Sabino, marca pessoal HCSLA.">
 <meta name="copyright" content="© 2026 Hudson Sabino. Marca HCSLA.">
+<meta name="theme-color" content="#2C2C2C">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Cifrador da Marca">
+<meta property="og:title" content="Cifrador da Marca">
+<meta property="og:description" content="Cifrador do Grau de Mestre Macom da Marca. Obra original de Hudson Sabino.">
+<meta property="og:image" content="icone-512.png">
+<meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -91,7 +102,13 @@
   input[type=color]{width:40px; height:26px; padding:0; border:1px solid var(--linha); background:none; cursor:pointer}
   input[type=checkbox]{accent-color:var(--oxblood); width:15px; height:15px}
 
-  .acoes{margin-top:22px; display:grid; gap:9px}
+  button.padrao{
+    margin-top:6px; font-size:12px; letter-spacing:.06em; padding:10px 12px;
+    border-style:dashed; border-color:rgba(237,234,227,.28); color:var(--cal-fraca);
+  }
+  button.padrao:hover{color:var(--cal); border-color:var(--oxblood)}
+  .restaurar{margin-top:16px}
+  .acoes{margin-top:22px; display:grid; gap:9px; padding-top:18px; border-top:1px solid var(--linha)}
   button{
     width:100%; font-family:"Inter",sans-serif; font-size:13px; font-weight:500;
     letter-spacing:.05em; padding:12px 16px; cursor:pointer;
@@ -190,15 +207,15 @@
     <aside class="lateral">
       <h2>Traço</h2>
       <div class="ctrl">
-        <div class="ctrl-topo"><span>Tamanho</span><output id="vTam">80</output></div>
-        <input id="tam" type="range" min="40" max="140" value="80">
+        <div class="ctrl-topo"><span>Tamanho</span><output id="vTam">90</output></div>
+        <input id="tam" type="range" min="40" max="140" value="90">
       </div>
       <div class="ctrl">
-        <div class="ctrl-topo"><span>Espessura</span><output id="vEsp">12</output></div>
-        <input id="esp" type="range" min="4" max="22" value="12">
+        <div class="ctrl-topo"><span>Espessura</span><output id="vEsp">13</output></div>
+        <input id="esp" type="range" min="4" max="22" value="13">
       </div>
-      <div class="linha-ctrl"><span>Cor</span><input id="cor" type="color" value="#A6120D"></div>
-      <div class="linha-ctrl"><label for="unir" style="margin:0;text-transform:none;letter-spacing:0;font-size:13px;color:var(--cal-fraca)">Traços unidos</label><input id="unir" type="checkbox"></div>
+      <div class="linha-ctrl"><span>Cor do traço</span><input id="cor" type="color" value="#A6120D"></div>
+      <button id="btnPadrao" class="principal restaurar">Restaurar Padrão</button>
       <div class="acoes">
         <button class="principal" id="btnSvg">Baixar SVG</button>
         <button id="btnPng">Baixar PNG</button>
@@ -293,8 +310,11 @@ function montar(alvo,txt,tam,esp,cor,unir,margem){
 const saida=document.getElementById("saida"), vazio=document.getElementById("vazio");
 const $ = id => document.getElementById(id);
 
+const TAM_PADRAO=90, ESP_PADRAO=13, COR_PADRAO="#A6120D";
+const UNIR=true;   // tracos sempre unidos
+
 function render(){
-  const tam=+$("tam").value, esp=+$("esp").value, cor=$("cor").value, unir=$("unir").checked;
+  const tam=+$("tam").value, esp=+$("esp").value, cor=$("cor").value, unir=UNIR;
   $("vTam").textContent=tam; $("vEsp").textContent=esp;
   const r=montar(saida,norm($("texto").value),tam,esp,cor,unir,tam*0.30);
   vazio.hidden=!r.vazio; saida.style.display=r.vazio?"none":"block";
@@ -347,9 +367,23 @@ for(const l of "ABCDEFGHIJKLMNOPQRSTUVWXYZ"){
 }
 
 const aviso=document.getElementById("aviso"); if(aviso) aviso.parentNode.removeChild(aviso);
-for(const id of ["texto","tam","esp","cor","unir"]) $(id).addEventListener("input",render);
+$("btnPadrao").onclick=function(){
+  $("tam").value=TAM_PADRAO;
+  $("esp").value=ESP_PADRAO;
+  $("cor").value=COR_PADRAO;
+  render();
+};
+
+for(const id of ["texto","tam","esp","cor"]) $(id).addEventListener("input",render);
 window.addEventListener("resize", render);
 render();
+</script>
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function(){
+    navigator.serviceWorker.register("sw.js").catch(function(){});
+  });
+}
 </script>
 </body>
 </html>
