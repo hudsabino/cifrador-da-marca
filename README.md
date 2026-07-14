@@ -12,14 +12,6 @@ pela marca pessoal **HCSLA**.
 - `icone-*.png`, `favicon.svg`, `apple-touch-icon.png` ... icones, gerados a partir da marca HCSLA
 - `LICENSE.txt` ............... declaracao de autoria e condicoes de uso
 
-## Como publicar
-
-**Netlify (mais rapido).** Acesse app.netlify.com/drop e arraste esta pasta inteira.
-
-**GitHub Pages (com registro datado de autoria).** Crie um repositorio publico,
-envie todos os arquivos desta pasta, e em Settings > Pages selecione a branch `main`
-e a pasta `/ (root)`.
-
 ## Instalar no celular
 
 Abra o endereco no Safari (iPhone) ou no Chrome (Android) e escolha
