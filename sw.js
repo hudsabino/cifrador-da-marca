@@ -1,4 +1,4 @@
-const CACHE = "cifrador-da-marca-v13";
+const CACHE = "cifrador-da-marca-v14";
 const ARQUIVOS = [
   "./", "./index.html", "./manifest.webmanifest",
   "./favicon.svg", "./icone-192.png", "./icone-512.png",
