@@ -1,0 +1,17 @@
+# Segredos e credenciais - NUNCA versionar
+.env
+.env.*
+*.local
+segredos.txt
+credenciais.txt
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+
+# Dependencias
+node_modules/
