@@ -1,6 +1,6 @@
 {
-  "name": "Cifrador da Marca",
-  "short_name": "Cifrador",
+  "name": "Marca do Marcador",
+  "short_name": "Marca do Marcador",
   "description": "Cifrador do Grau de Mestre Macom da Marca. Obra original de Hudson Sabino, marca pessoal HCSLA.",
   "start_url": "./index.html",
   "scope": "./",
